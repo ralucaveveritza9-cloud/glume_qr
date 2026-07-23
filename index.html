@@ -1,1 +1,43 @@
-<!DOCTYPE html><html lang='ro'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Jackpot QR</title><style>body{margin:0;font-family:Arial;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh}.card{width:90%;max-width:700px;background:#1c1c1c;border:2px solid #d4af37;border-radius:20px;padding:30px;text-align:center}h1{color:#d4af37}#msg{font-size:30px;min-height:120px;margin:30px 0}button{background:#d4af37;color:#111;border:0;padding:15px 28px;border-radius:12px;font-size:20px;font-weight:bold;cursor:pointer}</style></head><body><div class='card'><h1>🎰 JACKPOT QR</h1><div id='tip'>Apasă START</div><div id='msg'></div><button onclick='spin()'>🎲 START</button></div><script>let g=[],p=[],j=[];async function load(){try{g=await fetch('glume.json').then(r=>r.json());p=await fetch('provocari.json').then(r=>r.json());j=await fetch('jackpot.json').then(r=>r.json());}catch(e){msg.textContent='Completează fișierele JSON.'}}function rnd(a){return a[Math.floor(Math.random()*a.length)]}async function spin(){msg.textContent='🎰 Se învârte...';await new Promise(r=>setTimeout(r,1500));let x=Math.random(),it;if(x<.1&&j.length){tip.textContent='🎰 JACKPOT';it=rnd(j)}else if(x<.55&&p.length){tip.textContent='🎯 PROVOCARE';it=rnd(p)}else if(g.length){tip.textContent='😂 GLUMĂ';it=rnd(g)}else{msg.textContent='JSON gol';return}msg.textContent=it.text||it}load();</script></body></html>
+<!DOCTYPE html>
+<html lang="ro"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jackpot QR</title>
+<style>
+body{margin:0;background:#0d0d0d;color:#fff;font-family:Arial;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{width:92%;max-width:700px;background:#1b1b1b;border:2px solid #d4af37;border-radius:24px;padding:30px;text-align:center;box-shadow:0 0 25px rgba(212,175,55,.3)}
+h1{color:#d4af37;margin:0}
+#cat{margin-top:10px;color:#f5d76e;font-weight:bold}
+#msg{font-size:28px;min-height:130px;margin:35px 0}
+button{background:#d4af37;color:#111;border:0;padding:16px 30px;font-size:20px;font-weight:bold;border-radius:12px;cursor:pointer}
+button:hover{transform:scale(1.03)}
+</style></head>
+<body>
+<div class="box">
+<h1>🎰 JACKPOT QR</h1>
+<div id="cat">Apasă START</div>
+<div id="msg">Scanează • Joacă • Distrează-te</div>
+<button onclick="spin()">🎲 START</button>
+</div>
+<script>
+let glume=[],provocari=[],jackpot=[];
+async function incarca(){
+ try{
+  glume=await fetch('glume.json').then(r=>r.json());
+  provocari=await fetch('provocari.json').then(r=>r.json());
+  jackpot=await fetch('jackpot.json').then(r=>r.json());
+ }catch(e){msg.textContent='Completează fișierele JSON.';}
+}
+function aleator(v){return v[Math.floor(Math.random()*v.length)]}
+async function spin(){
+ const m=document.getElementById('msg');
+ const c=document.getElementById('cat');
+ m.textContent='🎰 Se învârte...';
+ await new Promise(r=>setTimeout(r,1800));
+ let x=Math.random(),rez;
+ if(x<0.1 && jackpot.length){c.textContent='🎰 JACKPOT';rez=aleator(jackpot);}
+ else if(x<0.55 && provocari.length){c.textContent='🎯 PROVOCARE';rez=aleator(provocari);}
+ else if(glume.length){c.textContent='😂 GLUMĂ';rez=aleator(glume);}
+ else {m.textContent='Fișierele JSON sunt goale.';return;}
+ m.textContent=typeof rez==='string'?rez:rez.text;
+}
+incarca();
+</script></body></html>
