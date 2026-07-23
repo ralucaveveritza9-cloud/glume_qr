@@ -8,7 +8,33 @@ h1{color:#d4af37;margin:0}
 #cat{margin-top:10px;color:#f5d76e;font-weight:bold}
 #msg{font-size:28px;min-height:130px;margin:35px 0}
 button{background:#d4af37;color:#111;border:0;padding:16px 30px;font-size:20px;font-weight:bold;border-radius:12px;cursor:pointer}
-button:hover{transform:scale(1.03)}
+button:hover{transform:scale(1.03)}#msg{
+ transition:.3s;
+}
+
+.spin{
+ animation:spinEffect .3s infinite alternate;
+}
+
+.win{
+ animation:winEffect .8s ease;
+}
+
+@keyframes spinEffect{
+ from{transform:scale(1)}
+ to{transform:scale(1.08)}
+}
+
+@keyframes winEffect{
+ 0%{transform:scale(.8);opacity:.3}
+ 50%{transform:scale(1.15)}
+ 100%{transform:scale(1);opacity:1}
+}
+
+.jack{
+ color:#ffd700;
+ text-shadow:0 0 20px gold;
+}
 </style></head>
 <body>
 <div class="box">
@@ -27,17 +53,42 @@ async function incarca(){
  }catch(e){msg.textContent='Completează fișierele JSON.';}
 }
 function aleator(v){return v[Math.floor(Math.random()*v.length)]}
-async function spin(){
+async function spinasync function spin(){
+
  const m=document.getElementById('msg');
  const c=document.getElementById('cat');
- m.textContent='🎰 Se învârte...';
+
+ m.className="spin";
+ m.textContent="🎰 SE ÎNVÂRTE...";
+
  await new Promise(r=>setTimeout(r,1800));
+
+ m.className="win";
+
  let x=Math.random(),rez;
- if(x<0.1 && jackpot.length){c.textContent='🎰 JACKPOT';rez=aleator(jackpot);}
- else if(x<0.55 && provocari.length){c.textContent='🎯 PROVOCARE';rez=aleator(provocari);}
- else if(glume.length){c.textContent='😂 GLUMĂ';rez=aleator(glume);}
- else {m.textContent='Fișierele JSON sunt goale.';return;}
+
+ if(x<0.1 && jackpot.length){
+  c.textContent='🎰 JACKPOT';
+  m.classList.add("jack");
+  rez=aleator(jackpot);
+  confetti();
+ }
+ else if(x<0.55 && provocari.length){
+  c.textContent='🎯 PROVOCARE';
+  rez=aleator(provocari);
+  confetti();
+ }
+ else if(glume.length){
+  c.textContent='😂 GLUMĂ';
+  rez=aleator(glume);
+ }
+ else{
+  m.textContent='Fișierele JSON sunt goale.';
+  return;
+ }
+
  m.textContent=typeof rez==='string'?rez:rez.text;
+
 }
 incarca();
-</script></body></html>
+</script><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script></body></html>
