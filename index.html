@@ -1,7 +1,32 @@
 <!DOCTYPE html>
 <html lang="ro"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jackpot QR</title>
-<style>
+#slots{
+display:flex;
+justify-content:center;
+gap:15px;
+font-size:45px;
+margin:20px;
+}
+
+#slots span{
+background:#111;
+border:2px solid #d4af37;
+border-radius:12px;
+padding:10px;
+min-width:55px;
+}
+
+.slot-spin{
+animation:slotSpin .15s infinite;
+}
+
+@keyframes slotSpin{
+0%{transform:translateY(-5px)}
+50%{transform:translateY(5px)}
+100%{transform:translateY(-5px)}
+}
+ <style>
 body{margin:0;background:#0d0d0d;color:#fff;font-family:Arial;display:flex;justify-content:center;align-items:center;min-height:100vh}
 .box{width:92%;max-width:700px;background:#1b1b1b;border:2px solid #d4af37;border-radius:24px;padding:30px;text-align:center;box-shadow:0 0 25px rgba(212,175,55,.3)}
 h1{color:#d4af37;margin:0}
@@ -39,6 +64,11 @@ button:hover{transform:scale(1.03)}#msg{
 <body>
 <div class="box">
 <h1>🎰 JACKPOT QR</h1>
+ <div id="slots">
+<span>🍒</span>
+<span>7️⃣</span>
+<span>⭐</span>
+</div>
 <div id="cat">Apasă START</div>
 <div id="msg">Scanează • Joacă • Distrează-te</div>
 <button onclick="spin()">🎲 START</button>
@@ -57,11 +87,20 @@ async function spin(){
 
  const m=document.getElementById('msg');
  const c=document.getElementById('cat');
+ const slots=document.querySelectorAll('#slots span');
+const simboluri=["🍒","🍋","⭐","7️⃣","💎","🍀"];
+
+slots.forEach(s=>{
+ s.classList.add("slot-spin");
+});
 
  m.className="spin";
  m.textContent="🎰 SE ÎNVÂRTE...";
 
- await new Promise(r=>setTimeout(r,1800));
+ await new Promise(r=>setTimeout(r,1800));slots.forEach((s,i)=>{
+ s.classList.remove("slot-spin");
+ s.textContent=simboluri[Math.floor(Math.random()*simboluri.length)];
+});
 
  m.className="win";
 
