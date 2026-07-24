@@ -97,7 +97,7 @@ if (sunetBtn) {
 
 async function incarca() {
     try {
-        afirmatii = await fetch("afirmatii.json").then(r => r.json());
+       afirmatii = await fetch("fortunecookie.json").then(r => r.json());
         provocari = await fetch("provocari.json").then(r => r.json());
         jackpot = await fetch("jackpot.json").then(r => r.json());
     } catch (e) {
