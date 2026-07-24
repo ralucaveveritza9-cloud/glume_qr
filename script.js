@@ -32,8 +32,15 @@ async function spin(){
 
     const animatie=setInterval(()=>{
 
-        sloturi.forEach(slot=>{
-            slot.classList.add("slot-spin");
+       for(let i=0;i<sloturi.length;i++){
+
+    await new Promise(r=>setTimeout(r,350));
+
+    sloturi[i].classList.remove("slot-spin");
+
+    sloturi[i].textContent=random(simboluri);
+
+}
             slot.textContent=random(simboluri);
         });
 
