@@ -281,7 +281,7 @@ async function spin() {
         confettiRealist();
 
     } else {
-        categorie.textContent = "✨ AFIRMAȚIE";
+       categorie.textContent = "🥠 FORTUNE COOKIE";
         rezultat = trage("afirmatii", afirmatii);
         vibreaza(30);
         sunetCastig();
