@@ -1,23 +1,28 @@
-let glume = [];
+let afirmatii = [];
 let provocari = [];
 let jackpot = [];
 
 // coada de rezultate rămase pentru fiecare categorie (fără repetiție
 // până se epuizează lista, apoi se amestecă din nou)
-const cozi = { glume: [], provocari: [], jackpot: [] };
+const cozi = { afirmatii: [], provocari: [], jackpot: [] };
 
 const sloturi = document.querySelectorAll(".slot");
 const categorie = document.getElementById("categorie");
 const mesaj = document.getElementById("mesaj");
+const memeImg = document.getElementById("memeImg");
 const buton = document.getElementById("startBtn");
 const sunetBtn = document.getElementById("sunetBtn");
 
 const simboluri = ["🍒", "🍋", "⭐", "7️⃣", "💎", "🍀", "🔔", "❤️"];
 
 // praguri de șansă: sub PRAG_JACKPOT -> jackpot,
-// sub PRAG_PROVOCARE -> provocare, restul -> glumă
+// sub PRAG_PROVOCARE -> provocare, restul -> afirmație
 const PRAG_JACKPOT = 0.08;
 const PRAG_PROVOCARE = 0.55;
+
+// cheie publică demo Giphy, oficial oferită de Giphy pentru teste/embed-uri mici
+// - schimb-o cu a ta de pe developers.giphy.com dacă vrei rezultate mai stabile
+const GIPHY_KEY = "dc6zaTOxFJmzC";
 
 // ------------------ sunet (sintetizat, fara fisiere externe) ------------------
 
@@ -92,7 +97,7 @@ if (sunetBtn) {
 
 async function incarca() {
     try {
-        glume = await fetch("glume.json").then(r => r.json());
+        afirmatii = await fetch("afirmatii.json").then(r => r.json());
         provocari = await fetch("provocari.json").then(r => r.json());
         jackpot = await fetch("jackpot.json").then(r => r.json());
     } catch (e) {
@@ -125,6 +130,33 @@ function random(lista) {
 
 function vibreaza(model) {
     if (navigator.vibrate) navigator.vibrate(model);
+}
+
+// ------------------ meme / gif (doar la jackpot, via Giphy API) ------------------
+
+async function arataMeme(tagGiphy) {
+    if (!memeImg || !tagGiphy) {
+        if (memeImg) memeImg.hidden = true;
+        return;
+    }
+    try {
+        const url = `https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=${encodeURIComponent(tagGiphy)}&rating=pg-13`;
+        const data = await fetch(url).then(r => r.json());
+        const gifUrl = data?.data?.images?.original?.url;
+        if (gifUrl) {
+            memeImg.src = gifUrl;
+            memeImg.hidden = false;
+        }
+    } catch (e) {
+        memeImg.hidden = true;
+    }
+}
+
+function ascundeMeme() {
+    if (memeImg) {
+        memeImg.hidden = true;
+        memeImg.removeAttribute("src");
+    }
 }
 
 // ------------------ animatie reels (fiecare rola se opreste pe rand) ------------------
@@ -214,6 +246,7 @@ async function spin() {
 
     categorie.textContent = "🎰 SE ÎNVÂRTE...";
     mesaj.textContent = "";
+    ascundeMeme();
 
     let rezultat;
     const sansa = Math.random();
@@ -237,6 +270,8 @@ async function spin() {
         sunetJackpot();
         confettiJackpot();
 
+        if (rezultat && rezultat.giphy) arataMeme(rezultat.giphy);
+
     } else if (sansa < PRAG_PROVOCARE && provocari.length) {
         categorie.textContent = "🎯 PROVOCARE";
         rezultat = trage("provocari", provocari);
@@ -246,8 +281,8 @@ async function spin() {
         confettiRealist();
 
     } else {
-        categorie.textContent = "😂 GLUMĂ";
-        rezultat = trage("glume", glume);
+        categorie.textContent = "✨ AFIRMAȚIE";
+        rezultat = trage("afirmatii", afirmatii);
         vibreaza(30);
         sunetCastig();
     }
