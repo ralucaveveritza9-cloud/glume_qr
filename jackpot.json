@@ -1,11 +1,10 @@
 [
-  { "text": "🎉 JACKPOT! Toată lumea aplaudă pentru tine!" },
-  { "text": "🎉 JACKPOT! Primești un bonus din partea organizatorului!" },
-  { "text": "🎉 JACKPOT! Ai dreptul să alegi următoarea provocare pentru altcineva." },
-  { "text": "🎉 JACKPOT! Toți trebuie să-ți spună un compliment." },
-  { "text": "🎉 JACKPOT! Ai scăpat de următoarea provocare." },
-  { "text": "🎉 JACKPOT! Ești oficial «Sărbătoritul Suprem al serii»." },
-  { "text": "🎉 JACKPOT! Cineva îți face acum o urare specială, pe loc." },
-  { "text": "🎉 JACKPOT! Toată lumea ridică paharul pentru tine." },
-  { "text": "🎉 JACKPOT! Primești o rundă gratis - o alege gazda!" }
+  { "text": "🎉 JACKPOT! Ești oficial 'main character' al serii.", "giphy": "money-cash" },
+  { "text": "🎉 JACKPOT! Rizz-ul tău e printat pe blockchain, nu poate fi șters.", "giphy": "fire" },
+  { "text": "🎉 JACKPOT! Ai drept la un 'canon event' - alegi tu următoarea provocare pentru altcineva.", "giphy": "celebration" },
+  { "text": "🎉 JACKPOT! Toată lumea îți dă props, no cap.", "giphy": "hype" },
+  { "text": "🎉 JACKPOT! Ești 'that girl / that guy' oficial certificat(ă) al serii.", "giphy": "sheesh" },
+  { "text": "🎉 JACKPOT! Primești un bonus - o alege gazda, cash sau compliment, tu alegi vibe-ul.", "giphy": "cash-money" },
+  { "text": "🎉 JACKPOT! Ai scăpat de următoarea provocare - immunity pass activat.", "giphy": "lit" },
+  { "text": "🎉 JACKPOT! Toată lumea ridică paharul/telefonul pentru tine, e oficial 'core memory'.", "giphy": "celebrate" }
 ]
