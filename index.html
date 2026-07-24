@@ -1,50 +1,42 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jackpot QR Premium</title>
-<style>
-body{margin:0;font-family:Arial;background:#111;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh}
-.box{max-width:700px;width:92%;background:#1d1d1d;padding:30px;border-radius:20px;border:2px solid gold;text-align:center}
-#slots{display:flex;justify-content:center;gap:12px;font-size:44px;margin:15px 0}
-#slots span{padding:10px;border:2px solid gold;border-radius:10px;background:#000;min-width:55px}
-.spin{animation:pulse .2s infinite alternate}
-@keyframes pulse{from{transform:translateY(-4px)}to{transform:translateY(4px)}}
-button{padding:15px 28px;font-size:20px;border:0;border-radius:10px;background:gold;cursor:pointer}
-#msg{min-height:100px;font-size:28px;margin:20px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎰 Jackpot QR</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
-<div class="box">
-<h1>🎰 JACKPOT QR</h1>
-<div id="slots"><span>🍒</span><span>7️⃣</span><span>💎</span></div>
-<div id="cat">Apasă START</div>
-<div id="msg">Scanează • Joacă • Distrează-te</div>
-<button onclick="spin()">🎲 START</button>
+
+<div class="container">
+
+    <h1>🎰 JACKPOT QR</h1>
+
+    <div id="slots">
+        <div class="slot">7️⃣</div>
+        <div class="slot">⭐</div>
+        <div class="slot">💎</div>
+    </div>
+
+    <div id="categorie">
+        Apasă START
+    </div>
+
+    <div id="mesaj">
+        Scanează • Joacă • Distrează-te
+    </div>
+
+    <button id="startBtn">
+        🎲 START
+    </button>
+
 </div>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<script>
-let glume=[],provocari=[],jackpot=[];
-const simboluri=["🍒","🍋","⭐","7️⃣","💎","🍀"];
-fetch("glume.json").then(r=>r.json()).then(d=>glume=d).catch(()=>{});
-fetch("provocari.json").then(r=>r.json()).then(d=>provocari=d).catch(()=>{});
-fetch("jackpot.json").then(r=>r.json()).then(d=>jackpot=d).catch(()=>{});
-function pick(a){return a[Math.floor(Math.random()*a.length)]}
-async function spin(){
- const slots=[...document.querySelectorAll("#slots span")];
- document.getElementById("msg").textContent="🎰 Se învârte...";
- document.getElementById("cat").textContent="";
- let t=setInterval(()=>slots.forEach(s=>{s.classList.add("spin");s.textContent=pick(simboluri)}),100);
- await new Promise(r=>setTimeout(r,1800));
- clearInterval(t);
- slots.forEach(s=>s.classList.remove("spin"));
- let x=Math.random(),txt="";
- if(x<0.08&&jackpot.length){txt=pick(jackpot);document.getElementById("cat").textContent="👑 JACKPOT";confetti();}
- else if(x<0.55&&provocari.length){txt=pick(provocari);document.getElementById("cat").textContent="🎯 PROVOCARE";confetti();}
- else if(glume.length){txt=pick(glume);document.getElementById("cat").textContent="😂 GLUMĂ";}
- else txt="Adaugă fișierele JSON.";
- document.getElementById("msg").textContent=typeof txt==="string"?txt:txt.text;
-}
-</script>
-</body></html>
+
+<script src="script.js"></script>
+
+</body>
+</html>
