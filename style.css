@@ -7,6 +7,7 @@ body{
     justify-content:center;
     align-items:center;
     min-height:100vh;
+    min-height:100dvh;
 }
 
 .container{
@@ -18,11 +19,28 @@ body{
     padding:30px;
     text-align:center;
     box-shadow:0 0 30px rgba(212,175,55,.3);
+    position:relative;
+}
+
+.badge{
+    position:absolute;
+    top:-16px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#d4af37;
+    color:#111;
+    font-weight:bold;
+    font-size:14px;
+    padding:6px 18px;
+    border-radius:999px;
+    white-space:nowrap;
+    box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
 
 h1{
     color:#d4af37;
     margin-bottom:10px;
+    margin-top:10px;
 }
 
 #slots{
@@ -56,6 +74,7 @@ h1{
     font-size:32px;
     line-height:1.4;
     margin:30px 0;
+    user-select:none;
 }
 
 button{
@@ -68,18 +87,68 @@ button{
     border-radius:15px;
     cursor:pointer;
     transition:.25s;
+    min-height:44px;
+    -webkit-tap-highlight-color:transparent;
 }
 
 button:hover{
     transform:scale(1.05);
 }
 
+button:disabled{
+    opacity:.6;
+    cursor:default;
+    transform:none;
+}
+
 .slot-spin{
-    animation:slot .15s infinite;
+    animation:slot .1s infinite;
+    filter:blur(1px);
+}
+
+.slot-stop{
+    animation:reelStop .2s ease-out;
 }
 
 @keyframes slot{
     0%{transform:translateY(-4px);}
     50%{transform:translateY(4px);}
     100%{transform:translateY(-4px);}
+}
+
+@keyframes reelStop{
+    0%{transform:scale(1.25);box-shadow:0 0 20px 6px rgba(212,175,55,.8);}
+    100%{transform:scale(1);box-shadow:none;}
+}
+
+.sunet-btn{
+    position:absolute;
+    top:14px;
+    right:14px;
+    background:transparent;
+    border:2px solid #d4af37;
+    color:#d4af37;
+    width:38px;
+    height:38px;
+    padding:0;
+    border-radius:50%;
+    font-size:18px;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.sunet-btn:hover{
+    transform:none;
+    background:rgba(212,175,55,.15);
+}
+
+@media (max-width:420px){
+    .container{padding:22px 18px;}
+    h1{font-size:28px;}
+    #categorie{font-size:20px;}
+    #mesaj{font-size:24px; min-height:100px;}
+    .slot{width:58px; height:58px; font-size:34px;}
+    button{padding:16px 30px; font-size:20px;}
 }
