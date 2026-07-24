@@ -1,10 +1,47 @@
 [
-  { "text": "🎉 JACKPOT! Ești oficial 'main character' al serii.", "giphy": "money-cash" },
-  { "text": "🎉 JACKPOT! Rizz-ul tău e printat pe blockchain, nu poate fi șters.", "giphy": "fire" },
-  { "text": "🎉 JACKPOT! Ai drept la un 'canon event' - alegi tu următoarea provocare pentru altcineva.", "giphy": "celebration" },
-  { "text": "🎉 JACKPOT! Toată lumea îți dă props, no cap.", "giphy": "hype" },
-  { "text": "🎉 JACKPOT! Ești 'that girl / that guy' oficial certificat(ă) al serii.", "giphy": "sheesh" },
-  { "text": "🎉 JACKPOT! Primești un bonus - o alege gazda, cash sau compliment, tu alegi vibe-ul.", "giphy": "cash-money" },
-  { "text": "🎉 JACKPOT! Ai scăpat de următoarea provocare - immunity pass activat.", "giphy": "lit" },
-  { "text": "🎉 JACKPOT! Toată lumea ridică paharul/telefonul pentru tine, e oficial 'core memory'.", "giphy": "celebrate" }
+  {
+    "text": "👑 AI SPART BANCA! Primești un RE-SPIN gratuit. Scanează din nou imediat!"
+  },
+  {
+    "text": "🎯 REVERSE CARD! Pasează următoarea provocare cui vrei tu."
+  },
+  {
+    "text": "🛡️ IMUNITATE! Următoarea provocare nu se aplică pentru tine."
+  },
+  {
+    "text": "🎧 DJ MODE! Tu alegi următoarea melodie."
+  },
+  {
+    "text": "📸 PAPARAZZI! Toată lumea face un selfie cu tine ACUM."
+  },
+  {
+    "text": "👑 BOSS MODE! Timp de 2 minute, tu decizi cine scanează următorul cod."
+  },
+  {
+    "text": "💸 TAXA DE NOROC! Fiecare persoană îți datorează un compliment."
+  },
+  {
+    "text": "🔥 DOUBLE TROUBLE! Alege două persoane care trebuie să scaneze imediat."
+  },
+  {
+    "text": "🎲 FORTUNA! Mai ai o șansă. Scanează din nou!"
+  },
+  {
+    "text": "⭐ VIP PASS! Poți refuza orice provocare fără explicații."
+  },
+  {
+    "text": "😂 SCHIMB DE DESTIN! Schimbă rezultatul tău cu al oricui din grup."
+  },
+  {
+    "text": "🎉 BONUS! Toată lumea te aplaudă 10 secunde. Da, regulamentul spune asta."
+  },
+  {
+    "text": "🚨 CHAOS! Toată lumea scanează din nou în același timp."
+  },
+  {
+    "text": "🍕 ULTIMA FELIE! Dacă există ceva bun de mâncare, ai primul drept."
+  },
+  {
+    "text": "💀 SUPER JACKPOT! Jocul te declară LEGENDĂ. Primești încă o rundă completă."
+  }
 ]
