@@ -9,78 +9,50 @@ const buton = document.getElementById("startBtn");
 
 const simboluri = ["🍒","🍋","⭐","7️⃣","💎","🍀","🔔","❤️"];
 
-async function incarca(){
-
+async function incarca() {
     try{
-
         glume = await fetch("glume.json").then(r=>r.json());
         provocari = await fetch("provocari.json").then(r=>r.json());
         jackpot = await fetch("jackpot.json").then(r=>r.json());
-
-    }
-    catch(e){
-
+    }catch(e){
         mesaj.textContent="Nu pot încărca fișierele JSON.";
-
     }
-
 }
 
 function random(lista){
-
     return lista[Math.floor(Math.random()*lista.length)];
-
-}
-
-function asteapta(ms){
-
-    return new Promise(r=>setTimeout(r,ms));
-
 }
 
 async function spin(){
 
-    buton.disabled = true;
+    buton.disabled=true;
 
-    categorie.textContent = "🎰 SE ÎNVÂRTE...";
-    mesaj.textContent = "";
+    categorie.textContent="🎰 SE ÎNVÂRTE...";
+    mesaj.textContent="";
 
-    const intervale = [];
+    const animatie=setInterval(()=>{
 
-    // pornește fiecare rolă independent
-    sloturi.forEach((slot,index)=>{
+        sloturi.forEach(slot=>{
+            slot.classList.add("slot-spin");
+            slot.textContent=random(simboluri);
+        });
 
-        intervale[index] = setInterval(()=>{
+    },100);
 
-            slot.textContent = random(simboluri);
+    await new Promise(r=>setTimeout(r,2000));
 
-        },100);
+    clearInterval(animatie);
 
-    });
-
-    // oprește prima rolă
-    await asteapta(1200);
-
-    clearInterval(intervale[0]);
-
-    // oprește a doua
-    await asteapta(350);
-
-    clearInterval(intervale[1]);
-
-    // oprește a treia
-    await asteapta(350);
-
-    clearInterval(intervale[2]);
+    sloturi.forEach(slot=>slot.classList.remove("slot-spin"));
 
     let rezultat;
-    const sansa = Math.random();
+    let sansa=Math.random();
 
-    if(sansa < 0.08 && jackpot.length){
+    if(sansa<0.08 && jackpot.length){
 
-        categorie.textContent = "👑 JACKPOT";
+        categorie.textContent="👑 JACKPOT";
 
-        rezultat = random(jackpot);
+        rezultat=random(jackpot);
 
         confetti({
             particleCount:250,
@@ -89,11 +61,12 @@ async function spin(){
         });
 
     }
-    else if(sansa < 0.55 && provocari.length){
 
-        categorie.textContent = "🎯 PROVOCARE";
+    else if(sansa<0.55 && provocari.length){
 
-        rezultat = random(provocari);
+        categorie.textContent="🎯 PROVOCARE";
+
+        rezultat=random(provocari);
 
         confetti({
             particleCount:120,
@@ -101,20 +74,21 @@ async function spin(){
         });
 
     }
+
     else{
 
-        categorie.textContent = "😂 GLUMĂ";
+        categorie.textContent="😂 GLUMĂ";
 
-        rezultat = random(glume);
+        rezultat=random(glume);
 
     }
 
     mesaj.textContent =
-        typeof rezultat === "string"
-            ? rezultat
-            : rezultat.text;
+        typeof rezultat==="string"
+        ? rezultat
+        : rezultat.text;
 
-    buton.disabled = false;
+    buton.disabled=false;
 
 }
 
