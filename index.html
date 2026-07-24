@@ -2,8 +2,9 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎰 Jackpot QR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0d0d0d">
+    <title>🎰 Jackpot QR - Majorat</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -13,6 +14,10 @@
 <body>
 
 <div class="container">
+
+    <div class="badge">🎂 Ediția Majorat</div>
+
+    <button id="sunetBtn" class="sunet-btn" aria-label="Pornește/oprește sunetul" title="Sunet">🔊</button>
 
     <h1>🎰 JACKPOT QR</h1>
 
@@ -26,7 +31,7 @@
         Apasă START
     </div>
 
-    <div id="mesaj">
+    <div id="mesaj" aria-live="polite">
         Scanează • Joacă • Distrează-te
     </div>
 
